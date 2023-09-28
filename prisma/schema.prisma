@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Page {
+  id    Int    @id @default(autoincrement())
+  title String
+  slug  String @unique
+
+  parent   Page?  @relation("ParentPage", fields: [parentId], references: [id])
+  parentId Int?
+  children Page[] @relation("ParentPage")
+
+  content String
+}
+
+model User {
+  id   Int     @id @default(autoincrement())
+  name String?
+}
