@@ -5,6 +5,7 @@ scalar DateTime
 
 type Mutation {
   createPage(data: PageCreateInput!): Page!
+  createUser(name: String!): User!
 }
 
 type Page {
@@ -22,5 +23,11 @@ input PageCreateInput {
 
 type Query {
   listPages: [Page!]!
+  listUsers: [User!]!
   pageById(id: Int!): Page
+}
+
+type User {
+  id: Int!
+  name: String
 }

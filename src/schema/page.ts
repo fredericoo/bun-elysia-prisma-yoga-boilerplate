@@ -1,5 +1,5 @@
-import { builder } from '../builder';
-import { prisma } from '../db';
+import { builder } from '~/builder';
+import { prisma } from '~/db';
 
 builder.prismaObject('Page', {
 	fields: t => ({
@@ -33,7 +33,7 @@ builder.queryFields(t => ({
 	}),
 	listPages: t.prismaField({
 		type: ['Page'],
-		resolve: (query, parent, args) => prisma.page.findMany(query),
+		resolve: query => prisma.page.findMany(query),
 	}),
 }));
 
