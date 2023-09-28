@@ -31,6 +31,10 @@ builder.queryFields(t => ({
 				where: { id: args.id },
 			}),
 	}),
+	listPages: t.prismaField({
+		type: ['Page'],
+		resolve: (query, parent, args) => prisma.page.findMany(query),
+	}),
 }));
 
 builder.mutationFields(t => ({

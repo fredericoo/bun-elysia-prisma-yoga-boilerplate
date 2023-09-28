@@ -21,5 +21,6 @@ input PageCreateInput {
 }
 
 type Query {
+  listPages: [Page!]!
   pageById(id: Int!): Page
 }
