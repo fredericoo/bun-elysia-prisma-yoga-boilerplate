@@ -1,37 +1,35 @@
 module.exports = {
-	extends: [
-		'turbo',
-		'prettier',
-		'plugin:import/recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:import/typescript',
-	],
+	extends: ['prettier', 'plugin:@typescript-eslint/recommended'],
 	parser: '@typescript-eslint/parser',
-	plugins: ['import', 'unused-imports', 'simple-import-sort', '@typescript-eslint'],
+	plugins: ['@typescript-eslint', 'import', 'unused-imports', 'simple-import-sort'],
+	root: true,
 
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 		project: true,
-		tsconfigRootDir: __dirname,
 	},
+
 	settings: {
-		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx'],
-		},
-		'import/resolver': {
-			typescript: {
-				project: ['tsconfig.json', 'packages/*/tsconfig.json', 'apps/*/tsconfig.json'],
-			},
-			node: {
-				project: ['tsconfig.json', 'packages/*/tsconfig.json', 'apps/*/tsconfig.json'],
-			},
-		},
+		typescript: true,
+		node: true,
+		'import/resolver': 'typescript',
 	},
+	// settings: {
+	// 	'import/parsers': {
+	// 		'@typescript-eslint/parser': ['.ts', '.tsx'],
+	// 	},
+	// 	'import/resolver': {
+	// 		typescript: {
+	// 			project: ['tsconfig.json'],
+	// 		},
+	// 		node: {
+	// 			project: ['tsconfig.json'],
+	// 		},
+	// 	},
+	// },
 
 	rules: {
-		'@typescript-eslint/no-explicit-any': 'off',
-
 		/** No absolute imports */
 		'import/no-absolute-path': 'error',
 
@@ -66,31 +64,7 @@ module.exports = {
 			},
 		],
 
-		'no-restricted-imports': [
-			'error',
-			{
-				paths: [
-					{
-						name: 'react-router-dom',
-						importNames: ['defer'],
-						message: "Please import defer from '~/domains/routing/routing.utils' instead.",
-					},
-					{
-						name: 'react-router-dom',
-						importNames: ['useLoaderData'],
-						message: "Please import useLoaderData from '~/domains/routing/routing.utils' instead.",
-					},
-					{
-						name: 'react-router-dom',
-						importNames: ['useActionData'],
-						message: "Please import useActionData from '~/domains/routing/routing.utils' instead.",
-					},
-				],
-			},
-		],
-
 		'@typescript-eslint/no-unnecessary-condition': 'warn',
-		'@typescript-eslint/no-unnecessary-type-arguments': 'warn',
 		'@typescript-eslint/prefer-for-of': 'warn',
 		'@typescript-eslint/prefer-function-type': 'warn',
 
@@ -113,14 +87,8 @@ module.exports = {
 		 */
 		'@typescript-eslint/consistent-generic-constructors': ['warn', 'constructor'],
 
-		/** Prefer Record<X,Y> over {[key: X]: Y} syntax */
-		'@typescript-eslint/consistent-indexed-object-style': ['warn', 'record'],
-
 		/** Already handled by unused-imports */
 		'@typescript-eslint/no-unused-vars': 'off',
-
-		/** React uses that a lot */
-		'@typescript-eslint/unbound-method': 'off',
 
 		'@typescript-eslint/ban-ts-comment': [
 			'error',
