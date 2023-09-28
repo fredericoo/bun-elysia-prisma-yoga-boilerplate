@@ -9,19 +9,23 @@ type Mutation {
 }
 
 type Page {
+  author: User
   content: String!
   id: Int!
+  parent: Page
   slug: String!
   title: String!
 }
 
 input PageCreateInput {
   content: String
+  parent: Int
   slug: String!
   title: String!
 }
 
 type Query {
+  getUserById(id: Int!): User
   listPages: [Page!]!
   listUsers: [User!]!
   pageById(id: Int!): Page
@@ -30,4 +34,5 @@ type Query {
 type User {
   id: Int!
   name: String
+  pages: [Page!]
 }

@@ -7,6 +7,8 @@ builder.prismaObject('Page', {
 		title: t.exposeString('title'),
 		content: t.exposeString('content'),
 		slug: t.exposeString('slug'),
+		parent: t.relation('parent', { nullable: true }),
+		author: t.relation('author', { nullable: true }),
 	}),
 });
 
@@ -15,6 +17,7 @@ export const PageCreateInput = builder.inputType('PageCreateInput', {
 		title: t.string({ required: true }),
 		slug: t.string({ required: true }),
 		content: t.string(),
+		parent: t.int({ required: false }),
 	}),
 });
 
@@ -50,6 +53,7 @@ builder.mutationFields(t => ({
 			return prisma.page.create({
 				...query,
 				data: {
+					parentId: args.data.parent,
 					slug: args.data.slug,
 					title: args.data.title,
 					content: args.data.content ?? '',
