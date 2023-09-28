@@ -1,15 +1,19 @@
-# Elysia with Bun runtime
+# Getting started
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+## Set up locally
+
+- Install Docker
+- Install Bun
+- Run
+
 ```bash
-bun create elysia ./elysia-example
+bun i
+bun setup-local
+bun dev
 ```
 
-## Development
-To start the development server run:
-```bash
-bun run dev
-```
+- Open http://localhost:3000
 
-Open http://localhost:3000/ with your browser to see the result.
+### GraphiQL
+
+- Open http://localhost:3000/graphql
